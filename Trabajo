@@ -1,0 +1,138 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool esPalindrome(int product){
+
+	if(product/100000 < 1){
+
+		int primero = product%10;
+		int segundo = (product%100 - product%10)/10;
+		int tercero = (product%1000 - product%100)/100;
+		int cuarto = (product%10000 - product%1000)/1000;
+		int quinto = (product%100000 - product%10000)/10000;
+
+		if((primero == quinto) && (segundo == cuarto)){
+			return true;
+		} else{
+			return false;
+		}
+
+	}else{
+
+		int primero = product%10;
+		int segundo = (product%100 - product%10)/10;
+		int tercero = (product%1000 - product%100)/100;
+		int cuarto = (product%10000 - product%1000)/1000;
+		int quinto = (product%100000 - product%10000)/10000;
+		int six = (product%1000000 - product%100000)/100000;
+
+		if((primero == six) && (segundo == quinto) && (tercero == cuarto)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+}
+int main()
+{
+// problema 1
+
+int sumamultiplos = 0;
+    for (int a = 0; a < 1000; ++a)
+    {
+        sumamultiplos += ((a % 5 == 0) || (a % 3 == 0)) ?
+            a : 0;
+    }
+    cout << "la suma de los multiplos de 3 y 5 menores que 1000 es:" <<sumamultiplos << "\n";
+
+//problema 2
+
+unsigned long long n = 40000000, suma = 0, f1 = 1, f2 = 1, siguiente = 0, i;
+
+for (i = 1; i <= n; ++i)
+    {
+        siguiente = f1 + f2;
+        f1 = f2;
+        f2 = siguiente;
+        suma += f1;}
+
+cout << "suma: " << suma << endl;
+
+
+//problema 3
+
+unsigned long long Numero = 600851475143;
+
+	bool esPrimo = 1;
+
+	int ultimoPrimo = 2;
+
+		for (int i = ultimoPrimo; i < Numero; i++) {
+
+				esPrimo = 1;
+
+				for (int j = 2; j < i; j++) {
+					if(i%j == 0)
+						esPrimo = 0;
+				}
+
+				if(esPrimo && (Numero%i == 0))
+				{
+					ultimoPrimo = i;
+					Numero = Numero / i;
+				}
+			}
+
+	cout << "el mayor factor primo de 600851475143 es: " << Numero << endl;
+
+//problema 4
+
+
+
+vector<int> palindrome;
+
+	for(int i = 100; i < 999; i++){
+		for(int j = 100; j < 999; j++){
+
+			int product = i*j;
+			if(esPalindrome(product)){
+				palindrome.push_back(product);
+			}
+
+		}
+	}
+
+
+
+	int mayor = palindrome[0];
+	for(int i=0; i < palindrome.size(); i++){
+		if(mayor < palindrome[i]){
+			mayor = palindrome[i];
+		}
+	}
+
+	cout << "el mayor palindrome es:" << mayor << endl;
+
+//problema 10
+
+int e;
+long long s = 20000000;
+long long sumatoria = 0;
+    for(int i=2; i<s; i++)
+        {
+            e=0;
+            for (int j=1; j<i;j++)
+                {
+                if(i%j==0)
+                    {
+                   e += 1;
+                    }
+                }
+        if (e<2)
+            {
+            sumatoria += i;
+            }
+        }
+cout << "la suma es" << sumatoria;
+}
